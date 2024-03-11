@@ -1,0 +1,34 @@
+<div class="container">
+    <section class="w-100 mx-auto bg-main-light py-5 px-5 rounded-2 my-5">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="fw-bold h3 text-black">Cart Shop</h1>
+            <button class="btn btn-primary btn-lg" [routerLink]="['/checkout' , cartDetails._id]">check out</button>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class=" fw-bold text-black h6 my-4">Total Price : <span class="text-main"> {{cartDetails.totalCartPrice|currency:'EGP'}}</span></h4>
+            <h4 class=" fw-bold text-black h6 my-4">total number of items : <span class="text-main">{{numOfTotal.numOfCartItems}}</span></h4>
+    
+        </div>
+        <div class="row border-bottom pb-2 d-flex align-items-center" *ngFor="let item of cartDetails.products">
+            <div class="col-md-2">
+                <img [src]="item.product.imageCover" class="w-100" alt="">
+            </div>
+            <div class="col-md-10">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3 class="h5">{{item.product.title}}</h3>
+                        <h4 class="h6">{{item.price | currency:'EGP'}}</h4>
+                        <button (click)="removeCartItem(item.product._id)" class="btn p-0 m-0 text-danger fw-bold fs-6"><i class="fa-regular fa-trash-can"></i> Remove</button>
+                    </div>
+                    <div>
+                        <button  (click)="changeCount(item.product._id , item.count +1)" class="btn border border-success">+</button>
+                        <span> {{item.count}} </span>
+                        <button (click)="changeCount(item.product._id , item.count -1)" class="btn border border-success">-</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
